@@ -1,4 +1,4 @@
 MySqli-Wrapper
 ==============
-
-Short Mysqli Wrapper
+Usage:
+<code>$db = new DBWrapper( $dbhost, $dbuser, $dbpass, $dbname );</code>
