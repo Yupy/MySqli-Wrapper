@@ -2,18 +2,18 @@
 #Database Class...
 
 class DB_Wrapper {
-	var $link_id;
-	var $query_result;
-	var $error_no;
-	var $error_msg;
+	public $link_id;
+	public $query_result;
+	public $error_no;
+	public $error_msg;
 
 	#Construcor
-	function DB_Wrapper( $hostname, $username, $password, $databasename ) 
+	function __construct( $hostname, $username, $password, $databasename ) 
 	{
 		$this->link_id = @mysqli_connect($hostname, $username, $password, $databasename);
 		
 		if ( !$this->link_id ) {
-			die( json_encode( array( "error" => mysqli_connect_error() ) ) );
+			die( json_encode( ["error" => mysqli_connect_error()], JSON_THROW_ON_ERROR ) );
 		}
 		
 		return $this->link_id;
@@ -69,7 +69,7 @@ class DB_Wrapper {
 	{
 		if ( is_array( $s ) )
 			return '';
-		return mysqli_real_escape_string( $this->link_id, $s );
+		return mysqli_real_escape_string( $this->link_id, (string) $s );
 	}
 	
 	#Error
